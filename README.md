@@ -1,9 +1,9 @@
 # Structured Project In Go Fiber
 
-[] Includes authentication and authorization
+* Includes authentication and authorization
 
-[] Modularity
+* Modularity
 
-[] Well described folders
+* Well described folders
 
-[] Use of environment variables
+* Use of environment variables
