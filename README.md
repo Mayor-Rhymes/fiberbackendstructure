@@ -10,8 +10,6 @@
 
 * Database (MongoDB). Easy to change the database to something else
 
-## Unfulfilled Objectives
 
-* Logic for unique emails
 
 
