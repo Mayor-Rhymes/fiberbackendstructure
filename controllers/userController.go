@@ -31,8 +31,14 @@ func Signup(c *fiber.Ctx) error {
 	errorHandler.HandleError(err)
     hashedPassword, err := bcrypt.GenerateFromPassword([]byte(data.Password), 10)
 
-
+    var result model.User
 	errorHandler.HandleError(err)
+	_ = collection.FindOne(context.Background(), bson.D{primitive.E{Key:"email", Value:data.Email}}).Decode(&result)
+
+	if result.Email != ""{
+
+         return c.Status(fiber.StatusNotAcceptable).JSON(fiber.Map{"message": "Email already in use"});
+	}
     _, err = collection.InsertOne(context.Background(), bson.M{"email": data.Email, "username": data.Username, "password": hashedPassword})
 
 	
