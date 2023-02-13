@@ -9,4 +9,6 @@ type Todo struct {
 
 	Content string `bson:"content" json:"content"`
 
+	User_email string `bson:"user_email" json:"user_email"`
+
 }

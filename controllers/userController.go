@@ -48,7 +48,10 @@ func Signup(c *fiber.Ctx) error {
 	}
 
 
+
+
 	claims := jwt.MapClaims{
+		
 		"email": data.Email,
 		"username":  data.Username,
 		"exp":   time.Now().Add(time.Hour * 72).Unix(),
@@ -98,6 +101,7 @@ func Login(c *fiber.Ctx) error {
 
 
 	claims := jwt.MapClaims{
+		
 		"email": data.Email,
 		"username":  data.Username,
 		"exp":   time.Now().Add(time.Hour * 72).Unix(),

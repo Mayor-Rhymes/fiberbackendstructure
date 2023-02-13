@@ -11,6 +11,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
+
 	// "github.com/golang-jwt/jwt/v4"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -26,10 +27,12 @@ func GetAll(c *fiber.Ctx) error{
 	user := c.Locals("user").(*jwt.Token)
 	claims := user.Claims.(jwt.MapClaims)
 	username := claims["username"].(string)
+	email := claims["email"].(string)
+	
 	
 
     collection := db.HandleTodoDB(os.Getenv("DATABASE_URL"))
-	cur, err := collection.Find(context.Background(), bson.D{})
+	cur, err := collection.Find(context.Background(), bson.D{primitive.E{Key: "user_email", Value: email}})
 	if err != nil{
 
 
@@ -82,6 +85,11 @@ func GetAll(c *fiber.Ctx) error{
  
  
  func PostTodo(c *fiber.Ctx) error{
+
+	 user := c.Locals("user").(*jwt.Token)
+	 claims := user.Claims.(jwt.MapClaims)
+	 email := claims["email"].(string)
+	 
  
 	 collection := db.HandleTodoDB(os.Getenv("DATABASE_URL"))
 
@@ -91,7 +99,7 @@ func GetAll(c *fiber.Ctx) error{
 	 err := c.BodyParser(data);
 	 errorHandler.HandleError(err)
     
-	 _, err = collection.InsertOne(context.Background(), bson.M{"title": data.Title, "content": data.Content})
+	 _, err = collection.InsertOne(context.Background(), bson.M{"title": data.Title, "content": data.Content, "user_email": email})
 
 	 if err != nil{
 
