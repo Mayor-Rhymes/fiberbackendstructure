@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	route "todobackend2/routes"
 	errorHandler "todobackend2/utils"
 
@@ -10,7 +11,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	
+
 	"github.com/joho/godotenv"
 	// "github.com/gofiber/fiber/v2/middleware/basicauth"
 )
@@ -21,9 +22,16 @@ var println = fmt.Println
 
 func main(){
 
+    prod := os.Getenv("PROD");
+	if prod != "true" {
+        
+		err := godotenv.Load()
+		errorHandler.HandleError(err)
 
-    err := godotenv.Load()
-	errorHandler.HandleError(err)
+
+	}
+    
+	
 	app := fiber.New()
 	app.Use(cors.New())
 	
