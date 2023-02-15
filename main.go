@@ -69,7 +69,7 @@ func main(){
 	println("Now Listening")
 
 
-	errorHandler.HandleError(app.Listen("0.0.0.0" + ":8080"))
+	errorHandler.HandleError(app.Listen("0.0.0.0:8080"))
 
 
 }
