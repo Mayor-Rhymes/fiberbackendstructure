@@ -19,10 +19,10 @@ func HandleTodoDB(URI string) *mongo.Collection {
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(URI))
 	errorHandler.HandleError(err)
 	collection := client.Database("learnfiber").Collection("todos")
-
+ 
 	return collection
 
-	
+
 
 }
 

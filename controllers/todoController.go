@@ -44,9 +44,11 @@ func GetAll(c *fiber.Ctx) error{
 
        return err
 	}
-	
+	//collection.Database().Client().Disconnect(context.Background());
     
 	return c.JSON(fiber.Map{"result": result, "user": username })
+
+	
 	   
  }
  
@@ -130,6 +132,9 @@ func GetAll(c *fiber.Ctx) error{
 
 
 	return c.Status(fiber.StatusAccepted).JSON(fiber.Map{"message": "document has been deleted", "document": deletedDocument})
+
+
+
  }
 
 
