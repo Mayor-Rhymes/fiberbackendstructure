@@ -69,7 +69,10 @@ func main(){
 	println("Now Listening")
 
 
-	errorHandler.HandleError(app.Listen("0.0.0.0:8080"))
+	port := os.Getenv("PORT")
+
+
+	errorHandler.HandleError(app.Listen("0.0.0.0:" + port))
 
 
 }
